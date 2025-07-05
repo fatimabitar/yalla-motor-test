@@ -60,7 +60,6 @@ const CityDropdown = memo(
     </div>
   )
 );
-
 CityDropdown.displayName = "CityDropdown";
 
 const FilterButton = memo(
@@ -100,7 +99,6 @@ const FilterButton = memo(
     </button>
   )
 );
-
 FilterButton.displayName = "FilterButton";
 
 export default function SearchFilterBar() {
@@ -121,8 +119,21 @@ export default function SearchFilterBar() {
   const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(true);
   const [opacity, setOpacity] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleScroll = useCallback(() => {
+    if (isMobile) return;
+
     const scrollY = window.scrollY;
     const hideThreshold = 300;
     const fadeDistance = 50;
@@ -141,7 +152,7 @@ export default function SearchFilterBar() {
       setIsSticky(false);
       setOpacity(0);
     }
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const debouncedHandleScroll = () => {
@@ -230,185 +241,200 @@ export default function SearchFilterBar() {
     <>
       <div
         className={`${
-          isSticky ? "sticky" : "relative"
+          isMobile ? "relative" : isSticky ? "sticky" : "relative"
         } top-0 z-30 bg-[#fcfcfc] border-b border-gray-200 py-6 w-full transition-opacity duration-300 shadow-md`}
-        style={{ opacity }}
+        style={{ opacity: isMobile ? 1 : opacity }}
       >
         <div className="mx-auto max-w-[95%] px-4">
           <BreadcrumbNavigation />
 
-          <div className="flex flex-col md:flex-row gap-4 mb-4">
-            <div className="relative">
-              <FilterButton
-                onClick={() => setIsCityDropdownOpen(!isCityDropdownOpen)}
-                displayText={filters.city}
-                isActive={isCityDropdownOpen}
-                widthClass="w-full md:w-[225px]"
-              />
-              {isCityDropdownOpen && (
-                <CityDropdown
-                  isOpen={isCityDropdownOpen}
-                  onSelect={handleCitySelect}
-                  currentCity={filters.city}
-                />
-              )}
-            </div>
-
-            <div className="relative flex-1">
-              <FilterButton
-                onClick={() => setActiveModal("brand")}
-                displayText={getDisplayText("brand")}
-                isActive={activeModal === "brand"}
-                icon={<Search className="w-4 h-4 text-gray-400" />}
-                widthClass="w-full md:w-[465px]"
-                hasChevron={false}
-              />
-            </div>
-
-            <div className="relative flex-1">
-              <FilterButton
-                onClick={() => filters.brand && setActiveModal("model")}
-                displayText={getDisplayText("model")}
-                isActive={activeModal === "model"}
-                disabled={!filters.brand}
-                icon={<Search className="w-4 h-4 text-gray-400" />}
-                widthClass="w-full md:w-[465px]"
-                hasChevron={false}
-              />
-            </div>
-
-            <button className="bg-[#124d99] hover:bg-blue-700 text-white w-full md:w-[250px] h-[42px] font-bold px-8 py-2 rounded-sm transition-colors shadow-sm">
-              Search
-            </button>
-          </div>
-
-          <div className="flex flex-wrap gap-4 items-center relative">
-            <div className="relative w-full md:w-auto">
-              <FilterButton
-                onClick={() => setActiveModal("price")}
-                displayText={getDisplayText("price")}
-                isActive={activeModal === "price"}
-                widthClass="w-full md:w-[225px]"
-              />
-              {activeModal === "price" && (
-                <Suspense
-                  fallback={
-                    <div className="absolute z-10 bg-white p-4 shadow-md">
-                      Loading...
-                    </div>
-                  }
-                >
-                  <PriceRangeDropdown
-                    onClose={() => setActiveModal(null)}
-                    priceMin={filters.priceMin}
-                    priceMax={filters.priceMax}
-                    onApply={(min, max) => {
-                      handleFilterChange("priceMin", min);
-                      handleFilterChange("priceMax", max);
-                    }}
-                  />
-                </Suspense>
-              )}
-            </div>
-
-            <div className="relative w-full md:w-auto">
-              <FilterButton
-                onClick={() => setActiveModal("year")}
-                displayText={getDisplayText("year")}
-                isActive={activeModal === "year"}
-                widthClass="w-full md:w-[225px]"
-              />
-              {activeModal === "year" && (
-                <Suspense
-                  fallback={
-                    <div className="absolute z-10 bg-white p-4 shadow-md">
-                      Loading...
-                    </div>
-                  }
-                >
-                  <YearRangeDropdown
-                    onClose={() => setActiveModal(null)}
-                    yearMin={filters.yearMin}
-                    yearMax={filters.yearMax}
-                    onApply={(min, max) => {
-                      handleFilterChange("yearMin", min);
-                      handleFilterChange("yearMax", max);
-                    }}
-                  />
-                </Suspense>
-              )}
-            </div>
-
-            <div className="relative w-full md:w-auto">
-              <FilterButton
-                onClick={() => setActiveModal("mileage")}
-                displayText={getDisplayText("mileage")}
-                isActive={activeModal === "mileage"}
-                widthClass="w-full md:w-[225px]"
-              />
-              {activeModal === "mileage" && (
-                <Suspense
-                  fallback={
-                    <div className="absolute z-10 bg-white p-4 shadow-md">
-                      Loading...
-                    </div>
-                  }
-                >
-                  <MileageRangeDropdown
-                    onClose={() => setActiveModal(null)}
-                    mileageMin={filters.mileageMin}
-                    mileageMax={filters.mileageMax}
-                    onApply={(min, max) => {
-                      handleFilterChange("mileageMin", min);
-                      handleFilterChange("mileageMax", max);
-                    }}
-                  />
-                </Suspense>
-              )}
-            </div>
-
-            <div className="relative w-full md:w-auto">
-              <FilterButton
-                onClick={() =>
-                  setActiveModal(
-                    activeModal === "bodyTypes" ? null : "bodyTypes"
-                  )
-                }
-                displayText={getDisplayText("bodyTypes")}
-                isActive={activeModal === "bodyTypes"}
-                widthClass="w-full md:w-[225px]"
-              />
-              {activeModal === "bodyTypes" && (
-                <Suspense
-                  fallback={
-                    <div className="absolute z-10 bg-white p-4 shadow-md"></div>
-                  }
-                >
-                  <BodyTypesDropdown
-                    selectedTypes={filters.bodyTypes}
-                    onApply={(types) => handleFilterChange("bodyTypes", types)}
-                    onClose={() => setActiveModal(null)}
-                  />
-                </Suspense>
-              )}
-            </div>
-
-            <FilterButton
-              onClick={() => setActiveModal("moreFilters")}
-              displayText="More Filters"
-              isActive={activeModal === "moreFilters"}
-              icon={<SlidersHorizontal className="w-4 h-4" />}
-              widthClass="w-full md:w-[225px]"
-              hasChevron={false}
-            />
-
+          {isMobile && (
             <button
-              onClick={clearAllFilters}
-              className="w-full md:w-fit px-4 md:px-14 py-2 h-[42px] text-[#3b3b3b] hover:text-gray-800 transition-colors text-sm md:text-base"
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              className="w-full bg-[#124d99] text-white py-2 px-4 rounded mb-4"
             >
-              Clear All
+              {isCollapsed ? "Show Filters" : "Hide Filters"}
             </button>
-          </div>
+          )}
+
+          {(!isMobile || !isCollapsed) && (
+            <>
+              <div className="flex flex-col md:flex-row gap-4 mb-4">
+                <div className="relative">
+                  <FilterButton
+                    onClick={() => setIsCityDropdownOpen(!isCityDropdownOpen)}
+                    displayText={filters.city}
+                    isActive={isCityDropdownOpen}
+                    widthClass="w-full md:w-[225px]"
+                  />
+                  {isCityDropdownOpen && (
+                    <CityDropdown
+                      isOpen={isCityDropdownOpen}
+                      onSelect={handleCitySelect}
+                      currentCity={filters.city}
+                    />
+                  )}
+                </div>
+
+                <div className="relative flex-1">
+                  <FilterButton
+                    onClick={() => setActiveModal("brand")}
+                    displayText={getDisplayText("brand")}
+                    isActive={activeModal === "brand"}
+                    icon={<Search className="w-4 h-4 text-gray-400" />}
+                    widthClass="w-full md:w-[465px]"
+                    hasChevron={false}
+                  />
+                </div>
+
+                <div className="relative flex-1">
+                  <FilterButton
+                    onClick={() => filters.brand && setActiveModal("model")}
+                    displayText={getDisplayText("model")}
+                    isActive={activeModal === "model"}
+                    disabled={!filters.brand}
+                    icon={<Search className="w-4 h-4 text-gray-400" />}
+                    widthClass="w-full md:w-[465px]"
+                    hasChevron={false}
+                  />
+                </div>
+
+                <button className="bg-[#124d99] hover:bg-blue-700 text-white w-full md:w-[250px] h-[42px] font-bold px-8 py-2 rounded-sm transition-colors shadow-sm">
+                  Search
+                </button>
+              </div>
+
+              <div className="flex flex-wrap gap-4 items-center relative">
+                <div className="relative w-full md:w-auto">
+                  <FilterButton
+                    onClick={() => setActiveModal("price")}
+                    displayText={getDisplayText("price")}
+                    isActive={activeModal === "price"}
+                    widthClass="w-full md:w-[225px]"
+                  />
+                  {activeModal === "price" && (
+                    <Suspense
+                      fallback={
+                        <div className="absolute z-10 bg-white p-4 shadow-md">
+                          Loading...
+                        </div>
+                      }
+                    >
+                      <PriceRangeDropdown
+                        onClose={() => setActiveModal(null)}
+                        priceMin={filters.priceMin}
+                        priceMax={filters.priceMax}
+                        onApply={(min, max) => {
+                          handleFilterChange("priceMin", min);
+                          handleFilterChange("priceMax", max);
+                        }}
+                      />
+                    </Suspense>
+                  )}
+                </div>
+
+                <div className="relative w-full md:w-auto">
+                  <FilterButton
+                    onClick={() => setActiveModal("year")}
+                    displayText={getDisplayText("year")}
+                    isActive={activeModal === "year"}
+                    widthClass="w-full md:w-[225px]"
+                  />
+                  {activeModal === "year" && (
+                    <Suspense
+                      fallback={
+                        <div className="absolute z-10 bg-white p-4 shadow-md">
+                          Loading...
+                        </div>
+                      }
+                    >
+                      <YearRangeDropdown
+                        onClose={() => setActiveModal(null)}
+                        yearMin={filters.yearMin}
+                        yearMax={filters.yearMax}
+                        onApply={(min, max) => {
+                          handleFilterChange("yearMin", min);
+                          handleFilterChange("yearMax", max);
+                        }}
+                      />
+                    </Suspense>
+                  )}
+                </div>
+
+                <div className="relative w-full md:w-auto">
+                  <FilterButton
+                    onClick={() => setActiveModal("mileage")}
+                    displayText={getDisplayText("mileage")}
+                    isActive={activeModal === "mileage"}
+                    widthClass="w-full md:w-[225px]"
+                  />
+                  {activeModal === "mileage" && (
+                    <Suspense
+                      fallback={
+                        <div className="absolute z-10 bg-white p-4 shadow-md">
+                          Loading...
+                        </div>
+                      }
+                    >
+                      <MileageRangeDropdown
+                        onClose={() => setActiveModal(null)}
+                        mileageMin={filters.mileageMin}
+                        mileageMax={filters.mileageMax}
+                        onApply={(min, max) => {
+                          handleFilterChange("mileageMin", min);
+                          handleFilterChange("mileageMax", max);
+                        }}
+                      />
+                    </Suspense>
+                  )}
+                </div>
+
+                <div className="relative w-full md:w-auto">
+                  <FilterButton
+                    onClick={() =>
+                      setActiveModal(
+                        activeModal === "bodyTypes" ? null : "bodyTypes"
+                      )
+                    }
+                    displayText={getDisplayText("bodyTypes")}
+                    isActive={activeModal === "bodyTypes"}
+                    widthClass="w-full md:w-[225px]"
+                  />
+                  {activeModal === "bodyTypes" && (
+                    <Suspense
+                      fallback={
+                        <div className="absolute z-10 bg-white p-4 shadow-md"></div>
+                      }
+                    >
+                      <BodyTypesDropdown
+                        selectedTypes={filters.bodyTypes}
+                        onApply={(types) =>
+                          handleFilterChange("bodyTypes", types)
+                        }
+                        onClose={() => setActiveModal(null)}
+                      />
+                    </Suspense>
+                  )}
+                </div>
+
+                <FilterButton
+                  onClick={() => setActiveModal("moreFilters")}
+                  displayText="More Filters"
+                  isActive={activeModal === "moreFilters"}
+                  icon={<SlidersHorizontal className="w-4 h-4" />}
+                  widthClass="w-full md:w-[225px]"
+                  hasChevron={false}
+                />
+
+                <button
+                  onClick={clearAllFilters}
+                  className="w-full md:w-fit px-4 md:px-14 py-2 h-[42px] text-[#3b3b3b] hover:text-gray-800 transition-colors text-sm md:text-base"
+                >
+                  Clear All
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
 

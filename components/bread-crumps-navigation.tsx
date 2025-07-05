@@ -36,7 +36,7 @@ export default function BreadcrumbNavigation({
   return (
     <nav aria-label="Breadcrumb" className="pb-6">
       <div className="">
-        <ol className="flex items-center space-x-2 text-sm">
+        <ol className="flex items-center space-x-2 text-xs md:text-sm">
           {breadcrumbItems.map((item, index) => (
             <li key={index} className="flex items-center">
               {index > 0 && (
