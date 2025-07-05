@@ -222,7 +222,7 @@ const CarCard = React.memo(function CarCard({
           </div>
         </div>
         <div>
-          <div className="flex items-center justify-between mt-3 px-3 border-b pb-3">
+          <div className="flex items-center flex-wrap gap-3 justify-between mt-3 px-3 border-b pb-3">
             <div className="flex items-center gap-2 text-[10px]">
               {car.canBeExported && (
                 <span className="bg-[#497285] text-white px-2 py-1 rounded">
