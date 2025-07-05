@@ -27,74 +27,71 @@ export default function TrustedCarsSection() {
 
   return (
     <section className="relative mb-8">
-      <div className="rounded-lg border-2 border-[#124d99] pt-8 pb-8 px-8 relative">
+      <div className="rounded-lg border-2 border-[#124d99] pt-12 pb-8 px-4 sm:px-6 md:px-8 relative">
         <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
-          <div className="bg-[#124d99] text-white px-8 py-2 rounded-full font-bold text-base">
+          <div className="bg-[#124d99] text-white px-6 py-2 rounded-full font-bold text-sm sm:text-base">
             Trusted Cars
           </div>
         </div>
 
-        <div className="absolute top-6 right-8">
+        <div className="absolute top-6 right-4 sm:right-8">
           <a
             href="#"
-            className="text-[#124d99] hover:underline font-bold text-base"
+            className="text-[#124d99] hover:underline font-bold text-sm sm:text-base"
           >
             View All
           </a>
         </div>
 
-        <h2 className="text-center text-[#3b3b3b] text-lg my-4">
+        <h2 className="text-center text-[#3b3b3b] text-base sm:text-lg my-4">
           To Ensure you Buy with Confidence
         </h2>
-        <div className="flex justify-center items-center gap-12 mb-10">
-          <div className="flex items-center gap-2 text-[#3b3b3b] text-base">
-            <div className="w-5 h-5 rounded-full flex items-center justify-center bg-white">
-              <Check className="w-3 h-3 text-blue-600" />
-            </div>
-            <span className="text-[#3b3b3b] text-base">1 Year Warranty</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-600">
-            <div className="w-5 h-5 rounded-full flex items-center justify-center bg-white">
-              <Check className="w-3 h-3 text-blue-600" />
-            </div>
-            <span className="text-[#3b3b3b] text-base">7 Day Return</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-600">
-            <div className="w-5 h-5 rounded-full flex items-center justify-center bg-white">
-              <Check className="w-3 h-3 text-blue-600" />
-            </div>
-            <span className="text-[#3b3b3b] text-base">
-              240 Point Inspection
-            </span>
-          </div>
+
+        <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 mb-10">
+          {["1 Year Warranty", "7 Day Return", "240 Point Inspection"].map(
+            (label) => (
+              <div
+                key={label}
+                className="flex items-center gap-2 text-[#3b3b3b] text-sm sm:text-base"
+              >
+                <div className="w-5 h-5 rounded-full flex items-center justify-center bg-white">
+                  <Check className="w-3 h-3 text-blue-600" />
+                </div>
+                <span>{label}</span>
+              </div>
+            )
+          )}
         </div>
 
-        <button
-          onClick={() => scroll("left")}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white border shadow-md rounded-full p-3 hover:bg-gray-50 z-10"
-          aria-label="Scroll left"
-        >
-          <ChevronLeft className="w-6 h-6 text-[#124d99]" />
-        </button>
+        {/* Hide scroll buttons on small screens */}
+        <div className="hidden sm:block">
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white border shadow-md rounded-full p-2 sm:p-3 hover:bg-gray-50 z-10"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-[#124d99]" />
+          </button>
 
-        <button
-          onClick={() => scroll("right")}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white  rounded-full p-3 hover:bg-gray-50 z-10 shadow-md"
-          aria-label="Scroll right"
-        >
-          <ChevronRight className="w-6 h-6 text-[#124d99]" />
-        </button>
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 sm:p-3 hover:bg-gray-50 z-10"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-[#124d99]" />
+          </button>
+        </div>
 
-        <div className="px-4">
+        <div className="px-2 sm:px-4">
           <div
             ref={scrollRef}
-            className="flex gap-20 pl-6 overflow-x-auto scrollbar-hide pb-4"
+            className="flex gap-6 sm:gap-10 md:gap-20 pl-2 sm:pl-6 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {trustedCarsData.map((car) => (
               <div
                 key={car.id}
-                className="flex-shrink-0 w-[200px] h-80 bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+                className="flex-shrink-0 w-60 sm:w-[200px] h-80 bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow snap-start"
               >
                 <div className="relative h-40">
                   <Image
@@ -116,7 +113,7 @@ export default function TrustedCarsSection() {
                   </div>
 
                   {car.approved && (
-                    <div className="absolute bottom-3 right-3 text-white text-4xl font-bold opacity-60">
+                    <div className="absolute bottom-3 right-3 text-white text-2xl sm:text-4xl font-bold opacity-60">
                       approved
                     </div>
                   )}
@@ -136,7 +133,7 @@ export default function TrustedCarsSection() {
                     <span>{car.location}</span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm text-[#3b3b3b]">
+                  <div className="flex flex-wrap items-center gap-1 text-sm text-[#3b3b3b]">
                     <span>{car.mileage.toLocaleString()} KM</span>
                     <span>|</span>
                     <span>{car.fuelType}</span>
