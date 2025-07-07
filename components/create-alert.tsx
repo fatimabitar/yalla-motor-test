@@ -36,7 +36,7 @@ export default function CreateAlertSidebar() {
 
   return (
     <div>
-      <div className="bg-white rounded-lg border-t-8 border-[#124d99] shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border-t-8 border-blue-600 shadow-sm overflow-hidden">
         <div className="px-5 py-2">
           <div className="flex items-start justify-between">
             <div className="flex-1">
@@ -49,7 +49,7 @@ export default function CreateAlertSidebar() {
             <button
               onClick={handleToggleClick}
               className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors focus:outline-none focus:ring-offset-2 ${
-                isEnabled ? "bg-[#124d99]" : "bg-[#b9bfcb]"
+                isEnabled ? "bg-blue-600" : "bg-[#b9bfcb]"
               }`}
               role="switch"
               aria-checked={isEnabled}

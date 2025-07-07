@@ -1,98 +1,136 @@
 "use client";
 
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { Check, ArrowRight, Users, TrendingUp, Shield } from "lucide-react";
 
 export default function SellYourCarSection() {
+  const stats = [
+    {
+      icon: Check,
+      number: "100%",
+      label: "Free Service",
+      description: "No hidden fees or charges",
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      icon: TrendingUp,
+      number: "200+",
+      label: "Daily Sales",
+      description: "Cars sold every day",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: Users,
+      number: "113K+",
+      label: "Happy Sellers",
+      description: "Satisfied with our service",
+      color: "from-purple-500 to-violet-500",
+    },
+    {
+      icon: Shield,
+      number: "500K+",
+      label: "Monthly Buyers",
+      description: "Active car shoppers",
+      color: "from-orange-500 to-red-500",
+    },
+  ];
+
   return (
-    <section className="px-3 mb-12">
-      <div className="max-w-7xl mx-auto text-[#3b3b3b]">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-4 text-black">
-            Do you want to sell your car for{" "}
-            <span className="text-[#124d99]">FREE</span>?
+    <section className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl overflow-hidden mb-12 relative">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-40 h-40 bg-blue-600 rounded-full -translate-x-20 -translate-y-20"></div>
+        <div className="absolute bottom-0 right-0 w-32 h-32 bg-indigo-600 rounded-full translate-x-16 translate-y-16"></div>
+        <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-purple-600 rounded-full -translate-x-12 -translate-y-12"></div>
+      </div>
+
+      <div className="relative p-8 lg:p-12">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-[#3b3b3b] mb-4">
+            Sell Your Car for <span className="text-blue-600">FREE</span>
           </h2>
-          <p className="text-base">
-            We have everything that makes it easier for you to sell your car on
-            our platform quickly
+          <p className="text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Join thousands of satisfied sellers and get the best value for your
+            car with our trusted platform
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="flex justify-center lg:justify-start">
+        {/* Image Section - Centered and Prominent */}
+        <div className="flex justify-center mb-12 w-full">
+          <div className="relative">
+            {/* Decorative background */}
+            <div className="absolute opacity-75 inset-0 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl transform rotate-3 scale-105"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-green-100 to-green-200 rounded-3xl transform -rotate-2 scale-110"></div>
+            {/* Main image container */}
             <div className="relative">
-              <div className="relative z-10 w-80 h-48 flex items-center justify-center">
-                <Image
-                  src="/images/sell.png"
-                  alt="Sell your car"
-                  fill
-                  className="object-contain"
-                  loading="lazy"
-                />
+              <div className="">
+                <div className="relative h-32 w-64">
+                  <Image
+                    src="/images/sell.png"
+                    alt="Sell your car illustration"
+                    fill
+                    className="object-contain"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="flex-1 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <span className="bg-[#ebf1fc] p-1 rounded-full shadow">
-                  <Check className="w-3 h-3 text-blue-600" />
-                </span>
-                <p className=" text-sm">
-                  Sell your car <span className="font-bold">100%</span>{" "}
-                  absolutely free on YallaMotor.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-[#ebf1fc] p-1 rounded-full shadow">
-                  <Check className="w-3 h-3 text-blue-600" />
-                </span>
-                <p className=" text-sm">
-                  <span className="font-bold">200+</span> Cars Sold Everyday.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-[#ebf1fc] p-1 rounded-full shadow">
-                  <Check className="w-3 h-3 text-blue-600" />
-                </span>
-                <p className=" text-sm">
-                  <span className="font-bold">113,000+</span> Satisfied Sellers.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-[#ebf1fc] p-1 rounded-full shadow">
-                  <Check className="w-3 h-3 text-blue-600" />
-                </span>
-                <p className=" text-sm">
-                  <span className="font-bold">500,000+</span> Monthly Buyers.
-                </p>
-              </div>
-            </div>
+            ;
           </div>
         </div>
 
-        <div className="text-center mt-8 relative flex items-center justify-center">
-          <div className="absolute left-[calc(50%-200px)]">
-            <svg width="57.357" height="58.324" viewBox="0 0 57.357 58.324">
-              <path
-                d="M-590.363-61.238a42.739,42.739,0,0,1,.264-4.727c2.3,16.44,19.5,32.151,40.409,32.225v-9.12l16.684,17.609L-549.69-7.641v-9.124C-572.167-16.859-590.363-38.351-590.363-61.238Z"
-                transform="translate(590.363 65.965)"
-                fill="#d8d8d8"
-              />
-            </svg>
-          </div>
-          <button className="bg-[#25d366] hover:bg-green-600 text-white font-bold text-base px-6 py-3 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200">
+        {/* Stats Grid - Below Image */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 group text-center"
+            >
+              {/* Icon with gradient background */}
+              <div
+                className={`w-16 h-16 bg-gradient-to-br ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
+              >
+                <stat.icon className="w-8 h-8 text-white" />
+              </div>
+
+              {/* Number */}
+              <div className="text-3xl font-bold text-gray-900 mb-2">
+                {stat.number}
+              </div>
+
+              {/* Label */}
+              <div className="text-lg font-semibold text-gray-800 mb-1">
+                {stat.label}
+              </div>
+
+              {/* Description */}
+              <div className="text-sm text-gray-600">{stat.description}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center">
+          <button className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-4 mx-auto group">
             SELL YOUR CAR FOR FREE
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </button>
-          <div className="absolute right-[calc(50%-200px)]">
-            <svg width="57.357" height="58.324" viewBox="0 0 57.357 58.324">
-              <path
-                d="M-533.006-61.238a42.739,42.739,0,0,0-.264-4.727c-2.3,16.44-19.5,32.151-40.409,32.225v-9.12l-16.684,17.61,16.684,17.61v-9.124C-551.2-16.859-533.006-38.351-533.006-61.238Z"
-                transform="translate(590.363 65.965)"
-                fill="#d8d8d8"
-              />
-            </svg>
+
+          {/* Additional info */}
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-600">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span>No registration required</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span>Get started in 2 minutes</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span>Trusted by 113K+ sellers</span>
+            </div>
           </div>
         </div>
       </div>

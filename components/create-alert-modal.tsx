@@ -76,7 +76,7 @@ const CreateAlertModal = React.memo(function CreateAlertModal({
             />
             <button
               type="submit"
-              className="w-full bg-[#124d99] text-white font-bold text-lg py-2 px-4 rounded-sm transition-colors hover:bg-blue-700"
+              className="w-full bg-blue-600 text-white font-bold text-lg py-2 px-4 rounded-sm transition-colors hover:bg-blue-700"
             >
               Notify Me
             </button>

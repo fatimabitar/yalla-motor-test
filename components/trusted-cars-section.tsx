@@ -27,9 +27,9 @@ export default function TrustedCarsSection() {
 
   return (
     <section className="relative mb-8">
-      <div className="rounded-lg border-2 border-[#124d99] pt-12 pb-8 px-4 sm:px-6 md:px-8 relative">
+      <div className="rounded-lg border-2 border-blue-600 pt-12 pb-8 px-4 sm:px-6 md:px-8 relative">
         <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
-          <div className="bg-[#124d99] text-white px-6 py-2 rounded-full font-bold text-sm sm:text-base">
+          <div className="bg-blue-600 text-white px-6 py-2 rounded-full font-bold text-sm sm:text-base">
             Trusted Cars
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function TrustedCarsSection() {
         <div className="absolute top-6 right-4 sm:right-8">
           <a
             href="#"
-            className="text-[#124d99] hover:underline font-bold text-sm sm:text-base"
+            className="text-blborder-blue-600 hover:underline font-bold text-sm sm:text-base"
           >
             View All
           </a>
@@ -70,7 +70,7 @@ export default function TrustedCarsSection() {
             className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white border shadow-md rounded-full p-2 sm:p-3 hover:bg-gray-50 z-10"
             aria-label="Scroll left"
           >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-[#124d99]" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-blborder-blue-600" />
           </button>
 
           <button
@@ -78,7 +78,7 @@ export default function TrustedCarsSection() {
             className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 sm:p-3 hover:bg-gray-50 z-10"
             aria-label="Scroll right"
           >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-[#124d99]" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-blborder-blue-600" />
           </button>
         </div>
 
@@ -120,11 +120,11 @@ export default function TrustedCarsSection() {
                 </div>
 
                 <div className="p-2">
-                  <h3 className="font-bold hover:text-[#124d99] transition-all text-[#3b3b3b] mb-3 text-sm cursor-pointer">
+                  <h3 className="font-bold hover:text-blborder-blue-600 transition-all text-[#3b3b3b] mb-3 text-sm cursor-pointer">
                     Used {car.make} {car.model} {car.year}
                   </h3>
 
-                  <div className="text-sm font-bold text-[#124d99] mb-1">
+                  <div className="text-sm font-bold text-blborder-blue-600 mb-1">
                     AED {car.price.toLocaleString()}
                   </div>
 

@@ -242,7 +242,7 @@ export default function SearchFilterBar() {
       <div
         className={`${
           isMobile ? "relative" : isSticky ? "sticky" : "relative"
-        } top-0 z-30 bg-[#fcfcfc] border-b border-gray-200 py-6 w-full transition-opacity duration-300 shadow-md`}
+        } top-0 z-30 bg-gray-50 border-b border-gray-200 py-6 w-full transition-opacity duration-300 shadow-md`}
         style={{ opacity: isMobile ? 1 : opacity }}
       >
         <div className="mx-auto max-w-[95%] px-4">
@@ -299,7 +299,7 @@ export default function SearchFilterBar() {
                   />
                 </div>
 
-                <button className="bg-[#124d99] hover:bg-blue-700 text-white w-full md:w-[250px] h-[42px] font-bold px-8 py-2 rounded-sm transition-colors shadow-sm">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white w-full md:w-[250px] h-[42px] font-bold px-8 py-2 rounded-sm transition-colors shadow-sm">
                   Search
                 </button>
               </div>
