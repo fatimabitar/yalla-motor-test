@@ -167,7 +167,7 @@ const CarCard = React.memo(function CarCard({
         <div className="flex-1 p-5">
           {/* Price Row with Better Typography */}
           <div className="flex items-start justify-between mb-4">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row items-center gap-2">
               <div className="text-2xl font-bold text-[#3b3b3b] tracking-tight">
                 AED {car.price.toLocaleString()}
               </div>
